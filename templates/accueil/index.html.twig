@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+{% block body %}
+<div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form>
+        <h3>Localux</h3>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('app_reservation') }}">Réserver un véhicule</a><br>
+				<a href="{{ path('app_logout') }}">Se déconnecter</a>
+            {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY')  == false %}
+				<a href="/connexion">Se connecter</a><br>
+                <a href="{{ path('app_inscription') }}">Créer son compte</a>
+            {% endif %}
+    </form>
+{% endblock %}
