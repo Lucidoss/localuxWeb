@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation
+{% endblock %}
+{% block body %}
+	<div class="background">
+		<div class="shape"></div>
+		<div class="shape"></div>
+	</div>
+	<form>
+		<h3>Reservation</h3>
+
+
+		<label for="name">Choisir le véhicule :</label></br>
+		<select>
+        {% for modele in lesModeles %}
+        <option>{{modele.nom}}</option>
+        {% endfor %}
+        </select>
+
+		<button>Reserver</button>
+	</span>
+</form>
+{% endblock %}

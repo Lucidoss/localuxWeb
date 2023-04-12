@@ -7,15 +7,23 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form>
+    <form action="{{ path('app_login') }}" method="POST">
         <h3>Connexion</h3>
 
         <label for="email">Email</label>
-        <input type="email" placeholder="Entrer votre email" id="email">
+        <input type="email" placeholder="Entrer votre email" id="email" name="_username">
 
         <label for="password">Mot De Passe</label>
-        <input type="password" placeholder="Entrer votre mot de passe" id="password">
+        <input type="password" placeholder="Entrer votre mot de passe" id="password" name="_password">
 
         <button>Se connecter</button>
+            <span>Pas encore inscrit ?</br>
+				<a href="{{ path('app_inscription') }}">Créer son compte</a>
+		    </span>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<li style="padding-left:200px">
+					<a href="{{ path('app_logout') }}">Se déconnecter</a>
+				</li>
+            {% endif %}
     </form>
 {% endblock %}
