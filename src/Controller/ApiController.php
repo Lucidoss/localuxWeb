@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ApiController extends AbstractController
 {
-    #[Route('/api/destination', name:'app_apiLesDestinations', methods:['GET'])]
+    #[Route('/api/destinations', name:'app_apiLesDestinations', methods:['GET'])]
     public function apiLesDestinations(ManagerRegistry $doctrine): JsonResponse
     {
         $repository = $doctrine->getRepository(Destination::class);
