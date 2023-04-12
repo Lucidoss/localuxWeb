@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{asset('styleconnexion.css')}}">
-        <link rel="icon" type="image/x-icon" href="{{asset('images/logo.jpg')}}">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{{asset('styleconnexion.css')}}">
+		<link rel="icon" type="image/x-icon" href="{{asset('images/logo.jpg')}}">
+		<script src="{{asset('script.js')}}"></script>
+		<link
+		rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300">
+		<!-- Google web font "Open Sans" -->
+		<link
+		rel="stylesheet" href="css/bootstrap.min.css">
+		<!-- https://getbootstrap.com/ -->
+		<link
+		rel="stylesheet" href="fontawesome/css/fontawesome-all.min.css">
+		<!-- https://fontawesome.com/ -->
+		<link
+		rel="stylesheet" type="text/css" href="slick/slick.css">
+		<!-- http://kenwheeler.github.io/slick/ -->
+		<link rel="stylesheet" type="text/css" href="slick/slick-theme.css">
+		<link
+		rel="stylesheet" href="css/tooplate-style.css">
+	<!-- Templatemo style -->
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+	</head>
+	{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+	{% block stylesheets %}
+		{{ encore_entry_link_tags('app') }}
+	{% endblock %}
+
+	{% block javascripts %}
+		{{ encore_entry_script_tags('app') }}
+	{% endblock %}
+</html></head><body>
+{% block body %}{% endblock %}</body></html>
