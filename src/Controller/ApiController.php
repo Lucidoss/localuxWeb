@@ -24,4 +24,21 @@ class ApiController extends AbstractController
         }
         return new JsonResponse($tabDestinations, 200, ['Access-Control-Allow-Origin'=>'*']);
     }
+
+    #[Route('/api/destinations/{id}', name: 'app_apiUneDestination', methods: ['GET'])]
+    public function apiUneDestination($id,  ManagerRegistry $doctrine): JsonResponse
+    {
+        //On recherche un hackathon via l'id de l'url parmis tout les hackathons
+        $repository = $doctrine->getRepository(Destination::class);
+        $laDestination = $repository->findOneBy(['id' => $id]);
+
+        // On créé et remplit un tableau pour le hackathon
+        $tableauDestination=[];
+        $tableauDestination[]=[
+            'id'=>$laDestination->getId(),
+            'libelle'=>$laDestination->getlibelle(),
+        ];
+        
+        return new JsonResponse($tableauDestination, 200, ['Access-Control-Allow-Origin'=>'*']);
+    }
 }
