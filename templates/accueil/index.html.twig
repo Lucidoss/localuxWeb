@@ -11,6 +11,7 @@
         <h3>Localux</h3>
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a href="{{ path('app_reservation') }}">Réserver un véhicule</a><br>
+                <a href="{{ path('app_historique') }}">Voir l'historique des reservations</a><br>
 				<a href="{{ path('app_logout') }}">Se déconnecter</a>
             {% endif %}
             {% if is_granted('IS_AUTHENTICATED_FULLY')  == false %}

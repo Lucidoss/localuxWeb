@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reservation
+{% block title %}Réservation
 {% endblock %}
 {% block body %}
 	<div class="background">
@@ -8,17 +8,12 @@
 		<div class="shape"></div>
 	</div>
 	<form>
-		<h3>Reservation</h3>
+		<h3>Réservation</h3>
 
+	<label for="name">Choisir le modele :</label>
+</br>
+	{% for modele in lesModeles %}
+		<a href="/choixreservation/{{ modele.ID }}">{{modele.nom}}</a>
+	{% endfor %}
 
-		<label for="name">Choisir le véhicule :</label></br>
-		<select>
-        {% for modele in lesModeles %}
-        <option>{{modele.nom}}</option>
-        {% endfor %}
-        </select>
-
-		<button>Reserver</button>
-	</span>
-</form>
-{% endblock %}
+<a href="/">Annuler la reservation</a><br></span></form>{% endblock %}

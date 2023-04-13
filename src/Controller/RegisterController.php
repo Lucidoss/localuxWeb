@@ -32,10 +32,10 @@ class RegisterController extends AbstractController
         $client->setEmail($email);
 
         $phone = $_POST['phone'];
-        $client->setEmail($phone);
+        $client->setTel($phone);
 
         $adresse = $_POST['adresse'];
-        $client->setEmail($adresse);
+        $client->setAdresse($adresse);
         
         $postalcode = $_POST['postalcode'];
         $client->setCP($postalcode);
@@ -45,8 +45,6 @@ class RegisterController extends AbstractController
         
         $mdp = $_POST['password'];
         $client->setMDP($mdp);
-        
-        dump($client);
 
         $entityManager=$doctrine->getManager();
         $entityManager->persist($client);

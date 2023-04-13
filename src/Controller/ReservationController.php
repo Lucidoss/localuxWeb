@@ -6,21 +6,51 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Locationsanschauffeur;
 use App\Entity\Modele;
 
 class ReservationController extends AbstractController
 {
     #[Route('/reservation', name: 'app_reservation')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function inscription(ManagerRegistry $doctrine): Response
     {
-
-        $repoModeles = $doctrine->getRepository(Modele::class);
-        $modeles = $repoModeles->findBy(
-            array()
+        $repoModele = $doctrine->getRepository(Modele::class);
+        $modeles = $repoModele->findBy(
+            array() 
         );
 
         return $this->render('reservation/index.html.twig', [
-            'lesModeles' => $modeles,
+            "lesModeles" => $modeles,
         ]);
+    }
+    #[Route('/reservation/post', name: 'app_reservationPOST')]
+    public function inscriptionPOST(ManagerRegistry $doctrine): Response
+    {
+        $location = new Locationsanschauffeur();
+
+        //$idClient = $_POST['immatricule'];
+        //$location->setIdclient($idClient);
+
+        //$nbKmDepart = $_POST['nb'];
+        //$location->setNbkmdepart($nbKmDepart);
+
+        //$location->setDateLocation();
+
+        //$location->setMontantRegle();
+
+        $dateDepart = $_POST['dateDepart'];
+        $location->setDateHreDepartPrevu($dateDepart);
+        
+        $dateRetour = $_POST['dateRetour'];
+        $location->setDateHreRetourPrevu($dateRetour);
+
+        $entityManager=$doctrine->getManager();
+        $entityManager->persist($location);
+        $entityManager->flush();
+
+        return $this->render('accueil/index.html.twig', [
+            'controller_name' => 'AccueilController',
+        ]);
+        
     }
 }
