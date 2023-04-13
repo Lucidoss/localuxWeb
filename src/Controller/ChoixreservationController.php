@@ -24,13 +24,15 @@ class ChoixreservationController extends AbstractController
         //     array() 
         // );
 
-        // $repoVehicule = $doctrine->getRepository(Vehicule::class);
-        // $vehicules = $repoVehicule->findBy(
-        //     array() 
-        // );
+        $repoVehicule = $doctrine->getRepository(Vehicule::class);
+        $vehicules=[];
+        foreach ($repoVehicule->findby(["id"=>$id]) as $vehicule) {
+            $vehicules[] = $vehicule;
+        }
+        dd($vehicules);
 
         return $this->render('choixreservation/index.html.twig', [
-            "Modele" => $leModele,
+            "Modele" => $leModele, "lesVehicules" => $vehicules,
         ]);
     }
 }

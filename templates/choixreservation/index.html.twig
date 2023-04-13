@@ -21,13 +21,14 @@
 	<p>Description :
 		{{ Modele.description }}</p>
 </br>
-{# <img src="{{ Modele.image }}" width="325px"/> #}
+<img src="{{ Modele.image }}" width="325px"/>
 
 <p>Choisir le vehicule :</p></br>
+{{dump(lesVehicules)}}
 <select>
-{# {% for vehicule in lesVehicules %}
-	<option id="immatricule" name="immatricule" >{{vehicule.immatriculation}}</option>
-{% endfor %} #}
+{% for vehicule in lesVehicules %}
+	<option id="immatricule" name="immatricule" >{{vehicule.Immatriculation}}</option>
+{% endfor %}
 </select>
 
 <p>Choisir la formule :</p></br>
