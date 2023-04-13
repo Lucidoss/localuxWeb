@@ -10,44 +10,51 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegisterController extends AbstractController
 {
-    #[Route('/register/{uc}', name: 'app_register')]
-    public function inscription(ManagerRegistry $doctrine, $uc): Response
+    #[Route('/register', name: 'app_register')]
+    public function inscription(ManagerRegistry $doctrine): Response
     {
-        if($uc == "POST") {
-            $client = new Client();
+        return $this->render('inscription/index.html.twig', [
+            'controller_name' => 'AccueilController',
+        ]);
+    }
+    #[Route('/register/post', name: 'app_registerPOST')]
+    public function inscriptionPOST(ManagerRegistry $doctrine): Response
+    {
+        $client = new Client();
 
-            $name = $_POST['nom'];
-            $client->setNOM($name);
+        $name = $_POST['name'];
+        $client->setNOM($name);
 
-            $firstname = $_POST['prenom'];
-            $client->setPRENOM($firstname);
+        $firstname = $_POST['firstname'];
+        $client->setPRENOM($firstname);
 
-            $email = $_POST['email'];
-            $client->setEmail($email);
+        $email = $_POST['email'];
+        $client->setEmail($email);
 
-            $phone = $_POST['tel'];
-            $client->setEmail($phone);
+        $phone = $_POST['phone'];
+        $client->setEmail($phone);
 
-            $adresse = $_POST['adresse'];
-            $client->setEmail($adresse);
-            
-            $postalcode = $_POST['cp'];
-            $client->setCP($postalcode);
-
-            $ville = $_POST['ville'];
-            $client->setVILLE($ville);
-            
-            $mdp = $_POST['mdp'];
-            $client->setMDP($mdp);
-
-            $entityManager=$doctrine->getManager();
-            $entityManager->persist($client);
-            $entityManager->flush();
-
-            return $this->render('accueil/index.html.twig', [
-                'controller_name' => 'AccueilController',
-            ]);
+        $adresse = $_POST['adresse'];
+        $client->setEmail($adresse);
         
-        }
+        $postalcode = $_POST['postalcode'];
+        $client->setCP($postalcode);
+
+        $ville = $_POST['city'];
+        $client->setVILLE($ville);
+        
+        $mdp = $_POST['password'];
+        $client->setMDP($mdp);
+        
+        dump($client);
+
+        $entityManager=$doctrine->getManager();
+        $entityManager->persist($client);
+        $entityManager->flush();
+
+        return $this->render('accueil/index.html.twig', [
+            'controller_name' => 'AccueilController',
+        ]);
+        
     }
 }
