@@ -15,9 +15,10 @@ class ReservationController extends AbstractController
     public function inscription(ManagerRegistry $doctrine): Response
     {
         $repoModele = $doctrine->getRepository(Modele::class);
-        $modeles = $repoModele->findBy(
-            array() 
-        );
+        $modeles=[];
+        foreach ($repoModele->findAll() as $modele) {
+            $modeles[] = $modele;
+        }
 
         return $this->render('reservation/index.html.twig', [
             "lesModeles" => $modeles,

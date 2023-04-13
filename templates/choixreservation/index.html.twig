@@ -21,20 +21,20 @@
 	<p>Description :
 		{{ Modele.description }}</p>
 </br>
-<img src="{{ Modele.image }}" width="325px"/>
+{# <img src="{{ Modele.image }}" width="325px"/> #}
 
 <p>Choisir le vehicule :</p></br>
 <select>
-{% for vehicule in lesVehicules %}
+{# {% for vehicule in lesVehicules %}
 	<option id="immatricule" name="immatricule" >{{vehicule.immatriculation}}</option>
-{% endfor %}
+{% endfor %} #}
 </select>
 
 <p>Choisir la formule :</p></br>
 <select>
-{% for formule in lesFormules %}
+{# {% for formule in lesFormules %}
 	<option>{{formule.libelle}}</option>
-{% endfor %}
+{% endfor %} #}
 </select>
 
 <p>Choisir la date de départ :</p></br>
