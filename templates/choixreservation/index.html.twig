@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation
+{% endblock %}
+{% block body %}
+	<div class="background">
+		<div class="shape"></div>
+		<div class="shape"></div>
+	</div>
+    <form action="{{ path('app_reservationPOST') }}" method="POST">
+	<h3>Réservation</h3>
+
+	<p>Nom :
+		{{ Modele.nom }}</p>
+	<p>Tarif Km Supplementaire :
+		{{ Modele.tarifkmsupplementaire }}</p>
+	<p>Nombre de places :
+		{{ Modele.nbplaces }}</p>
+	<p>Vitesse Max :
+		{{ Modele.vitessemax }}</p>
+	<p>Description :
+		{{ Modele.description }}</p>
+</br>
+<img src="{{ Modele.image }}" width="325px"/>
+
+<p>Choisir le vehicule :</p></br>
+<select>
+{% for vehicule in lesVehicules %}
+	<option id="immatricule" name="immatricule" >{{vehicule.immatriculation}}</option>
+{% endfor %}
+</select>
+
+<p>Choisir la formule :</p></br>
+<select>
+{% for formule in lesFormules %}
+	<option>{{formule.libelle}}</option>
+{% endfor %}
+</select>
+
+<p>Choisir la date de départ :</p></br>
+
+<input type="date" id="dateDepart" name="dateDepart">
+
+<p>Choisir la date de retour :</p></br>
+<input type="date" id="dateRetour" name="dateRetour"></br>
+
+<button>Confirmer la reservation</button>
+
+<a href="/">Annuler la reservation</a><br>
+</span>
+</form>
+{% endblock %}

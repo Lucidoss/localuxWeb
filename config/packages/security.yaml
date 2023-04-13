@@ -9,7 +9,7 @@ security:
             entity:
             # classe d'utilisateurs (elle peut avoir un autre nom que Utilisateur)
                 class: App\Entity\Client
-                property: mail # propriété de la classe d'utilisateurs qui joue le rôle de login
+                property: email # propriété de la classe d'utilisateurs qui joue le rôle de login
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
