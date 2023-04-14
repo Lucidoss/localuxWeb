@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Locationsanschauffeur;
 use App\Entity\Modele;
+use DateTime;
 
 class ReservationController extends AbstractController
 {
@@ -35,9 +36,8 @@ class ReservationController extends AbstractController
         //$nbKmDepart = $_POST['nb'];
         //$location->setNbkmdepart($nbKmDepart);
 
-        $currentDate = strtotime("now");
-        dd($currentDate);
-        // $location->setDateLocation();
+        $currentDate = new DateTime('now');
+        $location->setDateLocation($currentDate);
 
         //$location->setMontantRegle();
 
