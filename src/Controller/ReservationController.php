@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Location;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Locationsanschauffeur;
 use App\Entity\Modele;
+use App\Entity\Vehicule;
+use App\Repository\LocationsanschauffeurRepository;
 use DateTime;
 
 class ReservationController extends AbstractController
@@ -25,29 +28,42 @@ class ReservationController extends AbstractController
             "lesModeles" => $modeles,
         ]);
     }
+
     #[Route('/reservation/post', name: 'app_reservationPOST')]
     public function inscriptionPOST(ManagerRegistry $doctrine): Response
     {
-        $location = new Locationsanschauffeur();
+        $locationSansChauffeur = new Locationsanschauffeur();
+        $location = new Location();
 
-        //$idClient = $_POST['immatricule'];
-        //$location->setIdclient($idClient);
+        $idModele = $_POST['idModele'];
+        $idClient = $this->getUser()->getid();
 
-        //$nbKmDepart = $_POST['nb'];
-        //$location->setNbkmdepart($nbKmDepart);
+        $locationSansChauffeur->setIdclient($idClient);
+        $location->setIdclient($idClient);
+
+        $repoVehicule = $doctrine->getRepository(Vehicule::class);
+        $location->setImmatriculation($repoVehicule->findOneBy(["id"=>$idModele])->getImmatriculation());
+
+        $locationSansChauffeur->setMontantregle('40');
+        $location->setMontantregle('40');
+
+        $locationSansChauffeur->setNbkmdepart('500');
 
         $currentDate = new DateTime('now');
+        $locationSansChauffeur->setDateLocation($currentDate);
         $location->setDateLocation($currentDate);
 
-        //$location->setMontantRegle();
-
-        $dateDepart = $_POST['dateDepart'];
+        $dateDepart = new DateTime($_POST['dateDepart']);
+        $locationSansChauffeur->setDateHreDepartPrevu($dateDepart);
         $location->setDateHreDepartPrevu($dateDepart);
         
-        $dateRetour = $_POST['dateRetour'];
+        $dateRetour = new DateTime($_POST['dateRetour']);
+        $locationSansChauffeur->setDateHreRetourPrevu($dateRetour);
         $location->setDateHreRetourPrevu($dateRetour);
 
+
         $entityManager=$doctrine->getManager();
+        $entityManager->persist($locationSansChauffeur);
         $entityManager->persist($location);
         $entityManager->flush();
 
