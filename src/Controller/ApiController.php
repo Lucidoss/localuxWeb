@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Destination;
+use App\Entity\Modele;
+use App\Entity\Vehicule;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,11 +30,9 @@ class ApiController extends AbstractController
     #[Route('/api/destinations/{id}', name: 'app_apiUneDestination', methods: ['GET'])]
     public function apiUneDestination($id,  ManagerRegistry $doctrine): JsonResponse
     {
-        //On recherche un hackathon via l'id de l'url parmis tout les hackathons
         $repository = $doctrine->getRepository(Destination::class);
         $laDestination = $repository->findOneBy(['id' => $id]);
 
-        // On créé et remplit un tableau pour le hackathon
         $tableauDestination=[];
         $tableauDestination[]=[
             'id'=>$laDestination->getId(),
@@ -40,5 +40,29 @@ class ApiController extends AbstractController
         ];
         
         return new JsonResponse($tableauDestination, 200, ['Access-Control-Allow-Origin'=>'*']);
+    }
+
+    #[Route('/api/vehicule', name:'app_apiVehicule', methods:['GET'])]
+    public function apiVehicule(ManagerRegistry $doctrine): JsonResponse
+    {
+        $repositoryVehi = $doctrine->getRepository(Vehicule::class);
+        $repositoryModele = $doctrine->getRepository(Modele::class);
+        $lesVehicules = $repositoryVehi->findAll();
+        $tabVehicules=[];
+        foreach($lesVehicules as $leVehicules) {
+            $modele = $repositoryModele->findBy(['id'=>$leVehicules->getId()]);
+            $tabVehicules[]=[
+                'immatriculation'=>$leVehicules->getImmatriculation(),
+                'idModele'=>$leVehicules->getId(),
+                'modele'=>$modele[0]->getNom()
+            ];
+        }
+        return new JsonResponse($tabVehicules, 200, ['Access-Control-Allow-Origin'=>'*']);
+    }
+
+    #[Route('/api/reserver', name:'app_apiReserver', methods:['GET'])]
+    public function apiReserver(ManagerRegistry $doctrine)
+    {
+        
     }
 }
