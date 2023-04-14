@@ -19,10 +19,11 @@ class ChoixreservationController extends AbstractController
         $repoModele = $doctrine->getRepository(Modele::class);
         $leModele = $repoModele->find($id);
 
-        // $repoFormules = $doctrine->getRepository(FormuleSansChauffeur::class);
-        // $formules = $repoFormules->findBy(
-        //     array() 
-        // );
+        $repoFormule = $doctrine->getRepository(FormuleSansChauffeur::class);
+        $formules=[];
+        foreach ($repoFormule->findAll() as $formule) {
+            $formules[] = $formule;
+        }
 
         $repoVehicule = $doctrine->getRepository(Vehicule::class);
         $vehicules=[];
@@ -31,7 +32,7 @@ class ChoixreservationController extends AbstractController
         }
 
         return $this->render('choixreservation/index.html.twig', [
-            "Modele" => $leModele, "lesVehicules" => $vehicules,
+            "Modele" => $leModele, "lesVehicules" => $vehicules, "lesFormules"=>$formules,
         ]);
     }
 }
