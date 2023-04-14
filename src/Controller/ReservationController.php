@@ -35,7 +35,9 @@ class ReservationController extends AbstractController
         //$nbKmDepart = $_POST['nb'];
         //$location->setNbkmdepart($nbKmDepart);
 
-        //$location->setDateLocation();
+        $currentDate = strtotime("now");
+        dd($currentDate);
+        // $location->setDateLocation();
 
         //$location->setMontantRegle();
 

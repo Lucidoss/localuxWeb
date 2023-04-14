@@ -25,14 +25,8 @@ class ChoixreservationController extends AbstractController
             $formules[] = $formule;
         }
 
-        $repoVehicule = $doctrine->getRepository(Vehicule::class);
-        $vehicules=[];
-        foreach ($repoVehicule->findBy(["id"=>$id]) as $vehicule) {
-            $vehicules[] = $vehicule;
-        }
-
         return $this->render('choixreservation/index.html.twig', [
-            "Modele" => $leModele, "lesVehicules" => $vehicules, "lesFormules"=>$formules,
+            "Modele" => $leModele, "lesFormules"=>$formules,
         ]);
     }
 }
