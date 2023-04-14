@@ -10,7 +10,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Locationsanschauffeur;
 use App\Entity\Modele;
 use App\Entity\Vehicule;
-use App\Repository\LocationsanschauffeurRepository;
 use DateTime;
 
 class ReservationController extends AbstractController
@@ -42,6 +41,20 @@ class ReservationController extends AbstractController
         $location->setIdclient($idClient);
 
         $repoVehicule = $doctrine->getRepository(Vehicule::class);
+        $repoLocation = $doctrine->getRepository(Location::class);
+
+        //Normalement cela permet de mettre dans le tableau $vehicules[] les vehicules qui n'ont pas été louer
+        
+        // $vehicules = [];
+        // foreach ($repoLocation->findAll() as $locSansChauf) {
+        //     foreach ($repoVehicule->findBy(['id'=>$idModele]) as $vehicule) {
+        //         if ($vehicule->getImmatriculation() != $locSansChauf->getImmatriculation()) {
+        //             $vehicules[] = $vehicule;
+        //         }
+        //     }                
+        // }
+        
+        //donc après normalement on en prend un au hasard dans le tableau $vehicules[]
         $location->setImmatriculation($repoVehicule->findOneBy(["id"=>$idModele])->getImmatriculation());
 
         $locationSansChauffeur->setMontantregle('40');
