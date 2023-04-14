@@ -59,10 +59,4 @@ class ApiController extends AbstractController
         }
         return new JsonResponse($tabVehicules, 200, ['Access-Control-Allow-Origin'=>'*']);
     }
-
-    #[Route('/api/reserver', name:'app_apiReserver', methods:['GET'])]
-    public function apiReserver(ManagerRegistry $doctrine)
-    {
-        
-    }
 }
